@@ -8,12 +8,14 @@
 import UIKit
 
 class ViewController: UIViewController {
-// MARK: - IBOutlets
+    // MARK: - Variables
     private var items: [PostItem] = [
         PostItem(type: .post, image: UIImage(systemName: "applewatch"), text: "This is new AppleWatch!"),
         PostItem(type: .post, image: UIImage(systemName: "applepencil"), text: "This is new AppleWatch!"),
         PostItem(type: .ad, image: nil, text: "Check our new Table View"),
     ]
+    private var counter: Int = 0
+    // MARK: - IBOutlets
     @IBOutlet private var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -44,8 +46,22 @@ extension ViewController: UITableViewDataSource {
         case .ad:
             let cell = tableView.dequeueReusableCell(withIdentifier: "AdCell", for: indexPath) as! AdCell
             cell.configure(with: item.text)
+            cell.delegate = self
             return cell
         }
+    }
+    
+    
+}
+
+extension ViewController: AdDelegate {
+    func didTapActionButton(cell: UITableViewCell) {
+        counter += 1
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let row = indexPath.row
+        items[row].text = String(counter)
+        
+        tableView.reloadData()
     }
     
     

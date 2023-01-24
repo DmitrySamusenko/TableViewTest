@@ -9,12 +9,13 @@ import UIKit
 
 class ViewController: UIViewController {
     // MARK: - Variables
+    private var counter: Int = 0
     private var items: [PostItem] = [
         PostItem(type: .post, image: UIImage(systemName: "applewatch"), text: "This is new AppleWatch!"),
         PostItem(type: .post, image: UIImage(systemName: "applepencil"), text: "This is new AppleWatch!"),
         PostItem(type: .ad, image: nil, text: "Check our new Table View"),
     ]
-    private var counter: Int = 0
+    
     // MARK: - IBOutlets
     @IBOutlet private var tableView: UITableView!
     
@@ -26,8 +27,6 @@ class ViewController: UIViewController {
         let postNib = UINib(nibName: "PostCell", bundle: nil)
         tableView.register(postNib, forCellReuseIdentifier: "PostCell")
     }
-
-
 }
 
 extension ViewController: UITableViewDataSource {

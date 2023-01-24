@@ -21,6 +21,7 @@ class AdCell: UITableViewCell {
     func configure(with info: String) {
         infoLabel.text = info
     }
+     // MARK: - Throw action from awakeFromNib()
     override func awakeFromNib() {
         super.awakeFromNib()
         actionButton.addTarget(self, action: #selector(didTapActionButton), for: .touchUpInside)
